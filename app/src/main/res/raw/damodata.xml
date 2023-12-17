@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="1.0" xmlns:edmx="http://schemas.microsoft.com/ado/2007/06/edmx" xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata" xmlns:sap="http://www.sap.com/Protocols/SAPData">
+    <edmx:Reference Uri="https://sap.github.io/odata-vocabularies/vocabularies/Common.xml" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+        <edmx:Include Alias="Common" Namespace="com.sap.vocabularies.Common.v1"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="https://oasis-tcs.github.io/odata-vocabularies/vocabularies/Org.OData.Core.V1.xml" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+        <edmx:Include Alias="Core" Namespace="Org.OData.Core.V1"/>
+    </edmx:Reference>
+    <edmx:DataServices m:DataServiceVersion="2.0">
+        <Schema Namespace="CatalogService" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+            <EntityContainer Name="EntityContainer" m:IsDefaultEntityContainer="true">
+                <EntitySet Name="Books" EntityType="CatalogService.Books"/>
+                <EntitySet Name="BooksDetails" EntityType="CatalogService.BooksDetails"/>
+                <AssociationSet Name="Books_bookDetail" Association="CatalogService.Books_bookDetail">
+                    <End Role="Books" EntitySet="Books"/>
+                    <End Role="BooksDetails" EntitySet="BooksDetails"/>
+                </AssociationSet>
+            </EntityContainer>
+            <EntityType Name="Books">
+                <Key>
+                    <PropertyRef Name="ID"/>
+                </Key>
+                <Property Name="ID" Type="Edm.Int32" Nullable="false"/>
+                <Property Name="title" Type="Edm.String"/>
+                <Property Name="stock" Type="Edm.Int32"/>
+                <Property Name="bookProperty" Type="Edm.Int32"/>
+                <NavigationProperty Name="bookDetail" Relationship="CatalogService.Books_bookDetail" FromRole="Books" ToRole="BooksDetails"/>
+            </EntityType>
+            <EntityType Name="BooksDetails">
+                <Key>
+                    <PropertyRef Name="idDetail"/>
+                    <PropertyRef Name="idBook"/>
+                </Key>
+                <Property Name="idDetail" Type="Edm.Int32" Nullable="false"/>
+                <Property Name="idBook" Type="Edm.Int32" Nullable="false"/>
+                <Property Name="dettaglio" Type="Edm.String"/>
+            </EntityType>
+            <Association Name="Books_bookDetail">
+                <End Role="Books" Type="CatalogService.Books" Multiplicity="1">
+                    <OnDelete Action="Cascade"/>
+                </End>
+                <End Role="BooksDetails" Type="CatalogService.BooksDetails" Multiplicity="*"/>
+            </Association>
+        </Schema>
+    </edmx:DataServices>
+</edmx:Edmx>

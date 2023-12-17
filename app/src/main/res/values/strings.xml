@@ -1,0 +1,8 @@
+<resources  xmlns:tools="http://schemas.android.com/tools"
+             tools:ignore="MissingTranslation" >
+    <string name="application_name">DamProvaFinal</string>
+    <string name="eset_books">Books</string>
+    <string name="eset_books_single">Books</string>
+    <string name="eset_booksdetails">BooksDetails</string>
+    <string name="eset_booksdetails_single">BooksDetails</string>
+</resources>

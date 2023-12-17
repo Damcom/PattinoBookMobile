@@ -1,0 +1,17 @@
+   ______________________________
+ / \                             \.
+|   | This log file was created  |.
+ \_ | by the Wizard, it contains |.
+    | the configuration data     |.
+    | used for the application   |.
+    | generation.                |.
+    |                            |.
+    | It shouldn't be edited     |.
+    | manually, changing it      |.
+    | won't affect the generated |.
+    | sample.                    |.
+    |   _________________________|___
+    |  /                            /.
+    \_/____________________________/.
+
+{"projectName":"DamProvaFinal","projectLocation":"C:\\Users\\damco\\AndroidStudioProjects\\DamProvaFinal","projectNamespace":"com.company.damprovafinal","accountName":"psosoo","serviceURL":"https://b939b41ctrial-dev-mobile-service-dam.cfapps.us10-001.hana.ondemand.com/","serverURL":"https://mobile-service-cockpit-web.cfapps.us10.hana.ondemand.com/cockpit/v1/org/85a980dd-6712-494b-9517-62c2611ddc2a/space/2a1aa044-7204-4563-b52f-1f34641a91e0/","applicationID":"Mobile_Service_Dam","applicationSecurityConfig":"SAML","jsonPath":null,"senderID":null,"serverKey":null,"isLogEnabled":true,"isLogUploadEnabled":true,"SAPSDKLocation":"ENV_VARIABLE","activationType":"appConfigFile","generateJavaCode":false,"generateOnlineApp":false,"isUsageIncluded":true,"isCrashReportIncluded":true,"isMultipleUserMode":false,"isViewBaseFramework":true}
