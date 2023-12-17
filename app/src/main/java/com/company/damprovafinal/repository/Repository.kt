@@ -4,6 +4,7 @@ import androidx.lifecycle.MutableLiveData
 
 import com.company.damprovafinal.archcomp.SingleLiveEvent
 import com.company.damprovafinal.repository.OperationResult.Operation
+import com.sap.cloud.android.odata.entitycontainer.AnagraficaBelli
 import com.sap.cloud.android.odata.entitycontainer.Books
 import com.sap.cloud.android.odata.entitycontainer.BooksDetails
 
@@ -16,6 +17,7 @@ import com.sap.cloud.mobile.odata.EntitySet
 import com.sap.cloud.mobile.odata.EntityValue
 import com.sap.cloud.mobile.odata.EntityValueList
 import com.sap.cloud.mobile.odata.Property
+import com.sap.cloud.mobile.odata.RequestBatch
 import com.sap.cloud.mobile.odata.SortOrder
 import com.sap.cloud.mobile.odata.StreamBase
 import com.sap.cloud.mobile.odata.core.Action0
@@ -197,25 +199,78 @@ class Repository<T : EntityValue>(
      * @param newEntity - entity to create
      */
     fun create(newEntity: T) {
+
+        //Prova DeepEntity
         val newBook = Books()
-        newBook.id = 8
-        newBook.title = "Ciao a Tutti"
-        newBook.stock = 225
-        newBook.bookProperty = 3
+        newBook.id = 9
+        newBook.title = "Bella pe voi"
+        newBook.stock = 34
+        newBook.bookProperty = 4
+
         val newBookDet1 = BooksDetails()
-        val newBookDet2 = BooksDetails()
         newBookDet1.idBook = newBook.id
         newBookDet1.idDetail = 5
-        newBookDet1.dettaglio = "djdjdjjdj"
-
+        newBookDet1.dettaglio = "bella"
+        val newBookDet2 = BooksDetails()
         newBookDet2.idBook = newBook.id
         newBookDet2.idDetail = 4
-        newBookDet2.dettaglio = "ariperova"
+        newBookDet2.dettaglio = "pe voi"
+
         val dettagli = ArrayList<BooksDetails>()
         dettagli.add(newBookDet1)
         dettagli.add(newBookDet2)
+
+        val newAnagbelli1= AnagraficaBelli()
+        newAnagbelli1.id = newBook.id
+        newAnagbelli1.idTurpo = 1
+        newAnagbelli1.descrizione = "we we we"
+        val newAnagbelli2= AnagraficaBelli()
+        newAnagbelli2.id = newBook.id
+        newAnagbelli2.idTurpo = 2
+        newAnagbelli2.descrizione = "pi pi pi"
+
+        val belli = ArrayList<AnagraficaBelli>()
+        belli.add(newAnagbelli1)
+        belli.add(newAnagbelli2)
+
+        newBook.bookAnagBelli = belli
         newBook.bookDetail = dettagli
-        entityContainer.createEntity(newBook)
+        entityContainer.createEntityAsync(newBook,{
+            print("Prova")
+        },{
+            error->
+            print(error)
+        })
+        //Fine Prova DeepEntity
+
+        //Prova Batch/Change Set con Anagrafica
+       /* val batch = RequestBatch()
+        val updateChangeSet = ChangeSet()
+        val newAnagBell1 = AnagraficaBelli()
+        newAnagBell1.id = 1
+        newAnagBell1.idTurpo = 1
+        newAnagBell1.descrizione = "epriririririi"
+
+        updateChangeSet.createEntity(newAnagBell1)
+
+        val newAnagBell2 = AnagraficaBelli()
+        newAnagBell2.id = 2
+        newAnagBell2.idTurpo = 1
+        newAnagBell2.descrizione = "aridahe"
+
+        updateChangeSet.createEntity(newAnagBell2)
+
+        batch.addChanges(updateChangeSet)
+        entityContainer.processBatchAsync(batch,
+            {
+                print(2)
+            },
+            { error ->
+                print(3)
+            }
+        )*/
+        //Fine Prova Batch/Change Set con Anagrafica
+
         /*if (newEntity.entityType.isMedia) {
             val operationResult: OperationResult<T> = OperationResult(IllegalStateException("Specify media resource for Media Linked Entity"), Operation.CREATE)
             createResult.value = operationResult

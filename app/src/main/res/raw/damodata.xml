@@ -11,9 +11,14 @@
             <EntityContainer Name="EntityContainer" m:IsDefaultEntityContainer="true">
                 <EntitySet Name="Books" EntityType="CatalogService.Books"/>
                 <EntitySet Name="BooksDetails" EntityType="CatalogService.BooksDetails"/>
+                <EntitySet Name="AnagraficaBelli" EntityType="CatalogService.AnagraficaBelli"/>
                 <AssociationSet Name="Books_bookDetail" Association="CatalogService.Books_bookDetail">
                     <End Role="Books" EntitySet="Books"/>
                     <End Role="BooksDetails" EntitySet="BooksDetails"/>
+                </AssociationSet>
+                <AssociationSet Name="Books_bookAnagBelli" Association="CatalogService.Books_bookAnagBelli">
+                    <End Role="Books" EntitySet="Books"/>
+                    <End Role="AnagraficaBelli" EntitySet="AnagraficaBelli"/>
                 </AssociationSet>
             </EntityContainer>
             <EntityType Name="Books">
@@ -25,6 +30,7 @@
                 <Property Name="stock" Type="Edm.Int32"/>
                 <Property Name="bookProperty" Type="Edm.Int32"/>
                 <NavigationProperty Name="bookDetail" Relationship="CatalogService.Books_bookDetail" FromRole="Books" ToRole="BooksDetails"/>
+                <NavigationProperty Name="bookAnagBelli" Relationship="CatalogService.Books_bookAnagBelli" FromRole="Books" ToRole="AnagraficaBelli"/>
             </EntityType>
             <EntityType Name="BooksDetails">
                 <Key>
@@ -35,11 +41,26 @@
                 <Property Name="idBook" Type="Edm.Int32" Nullable="false"/>
                 <Property Name="dettaglio" Type="Edm.String"/>
             </EntityType>
+            <EntityType Name="AnagraficaBelli">
+                <Key>
+                    <PropertyRef Name="ID"/>
+                    <PropertyRef Name="idTurpo"/>
+                </Key>
+                <Property Name="ID" Type="Edm.Int32" Nullable="false"/>
+                <Property Name="idTurpo" Type="Edm.Int32" Nullable="false"/>
+                <Property Name="descrizione" Type="Edm.String"/>
+            </EntityType>
             <Association Name="Books_bookDetail">
                 <End Role="Books" Type="CatalogService.Books" Multiplicity="1">
                     <OnDelete Action="Cascade"/>
                 </End>
                 <End Role="BooksDetails" Type="CatalogService.BooksDetails" Multiplicity="*"/>
+            </Association>
+            <Association Name="Books_bookAnagBelli">
+                <End Role="Books" Type="CatalogService.Books" Multiplicity="1">
+                    <OnDelete Action="Cascade"/>
+                </End>
+                <End Role="AnagraficaBelli" Type="CatalogService.AnagraficaBelli" Multiplicity="*"/>
             </Association>
         </Schema>
     </edmx:DataServices>
